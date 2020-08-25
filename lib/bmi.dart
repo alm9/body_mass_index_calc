@@ -9,21 +9,28 @@ class Bmi extends StatefulWidget {
 class _BmiState extends State<Bmi> {
   final TextEditingController _heightController = TextEditingController(); //_var = private var
   final TextEditingController _weightController = TextEditingController(); //_var = private var
+  final key = GlobalKey<ScaffoldState>(); //to save the state of Scaffold
 
   _onItemTapped(int index){
-    // debugPrint(index.toString());
     if (index==0){
       _heightController.clear();
       _weightController.clear();
     } else {
-       debugPrint(_heightController.text);
-       debugPrint(_weightController.text);
+      if (_heightController.text.isEmpty || _weightController.text.isEmpty)
+        {
+          key.currentState.showSnackBar(SnackBar(
+            content: Text('Type height and weigth', style: TextStyle(fontSize: 20),),
+          ));
+        }else{
+
+        }
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: key, //saves the state of Scaffold in the var 'key'
       appBar: AppBar(
         title: Text('BMI Calculator')
       ),
