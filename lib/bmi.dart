@@ -10,19 +10,30 @@ class _BmiState extends State<Bmi> {
   final TextEditingController _heightController = TextEditingController(); //_var = private var
   final TextEditingController _weightController = TextEditingController(); //_var = private var
   final key = GlobalKey<ScaffoldState>(); //to save the state of Scaffold
+  var _result = '';
 
   _onItemTapped(int index){
     if (index==0){
       _heightController.clear();
       _weightController.clear();
+      setState(() {
+        _result = '';
+      });
+
     } else {
       if (_heightController.text.isEmpty || _weightController.text.isEmpty)
         {
           key.currentState.showSnackBar(SnackBar(
-            content: Text('Type height and weigth', style: TextStyle(fontSize: 20),),
+            content: Text('Type height and weight', style: TextStyle(fontSize: 20),),
           ));
         }else{
-
+          var weight = double.parse(_weightController.text);
+          var height = double.parse(_heightController.text);
+          var bmi = weight / (height*height);
+//          debugPrint(bmi.toStringAsFixed(2)); //print 2 decimal places
+          setState(() {
+            _result = 'BMI = ${bmi.toStringAsFixed(2)}';
+          });
         }
     }
   }
@@ -40,6 +51,7 @@ class _BmiState extends State<Bmi> {
           Image.asset("assets/balance.png", width: 100),
           TextField(
             controller: _heightController, //to controll text inputs
+            keyboardType: TextInputType.numberWithOptions(decimal: true),
             decoration: InputDecoration(
               hintText: 'Height',
               border: OutlineInputBorder(
@@ -50,14 +62,16 @@ class _BmiState extends State<Bmi> {
           ),
           TextField(
             controller: _weightController,
+            keyboardType: TextInputType.numberWithOptions(decimal: true),
             decoration: InputDecoration(
               hintText: 'Weight',
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20)
               ),
               icon: Icon(Icons.person)
-            ),//to controll text inputs
-          )
+            ),
+          ),
+          Text('$_result', style: TextStyle(fontSize: 30)),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
