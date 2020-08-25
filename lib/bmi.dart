@@ -10,6 +10,17 @@ class _BmiState extends State<Bmi> {
   final TextEditingController _heightController = TextEditingController(); //_var = private var
   final TextEditingController _weightController = TextEditingController(); //_var = private var
 
+  _onItemTapped(int index){
+    // debugPrint(index.toString());
+    if (index==0){
+      _heightController.clear();
+      _weightController.clear();
+    } else {
+       debugPrint(_heightController.text);
+       debugPrint(_weightController.text);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,6 +55,7 @@ class _BmiState extends State<Bmi> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.indigo,
+        onTap: (value) => _onItemTapped(value),
         items: [
           //clear
           BottomNavigationBarItem(
