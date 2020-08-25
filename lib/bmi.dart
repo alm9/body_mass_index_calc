@@ -42,6 +42,21 @@ class _BmiState extends State<Bmi> {
           )
         ],
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.indigo,
+        items: [
+          //clear
+          BottomNavigationBarItem(
+            icon: Icon(Icons.clear),
+            title: Text('Clear', style: TextStyle(color: Colors.white, fontSize: 25))
+          ),
+          //calculate bmi
+          BottomNavigationBarItem(
+            icon: Icon(Icons.check),
+              title: Text('Calculate', style: TextStyle(color: Colors.white, fontSize: 25),)
+          )
+        ],
+      ),
     );
   }
 }
