@@ -17,12 +17,28 @@ class _BmiState extends State<Bmi> {
         title: Text('BMI Calculator')
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
+          Image.asset("assets/balance.png", width: 100),
           TextField(
             controller: _heightController, //to controll text inputs
+            decoration: InputDecoration(
+              hintText: 'Height',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20)
+              ),
+              icon: Icon(Icons.accessibility)
+            ),
           ),
           TextField(
-            controller: _weightController, //to controll text inputs
+            controller: _weightController,
+            decoration: InputDecoration(
+              hintText: 'Weight',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20)
+              ),
+              icon: Icon(Icons.person)
+            ),//to controll text inputs
           )
         ],
       ),
