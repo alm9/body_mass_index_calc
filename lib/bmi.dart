@@ -11,6 +11,7 @@ class _BmiState extends State<Bmi> {
   final TextEditingController _weightController = TextEditingController(); //_var = private var
   final key = GlobalKey<ScaffoldState>(); //to save the state of Scaffold
   var _result = '';
+  var _situation = '';
 
   _onItemTapped(int index){
     if (index==0){
@@ -18,6 +19,7 @@ class _BmiState extends State<Bmi> {
       _weightController.clear();
       setState(() {
         _result = '';
+        _situation = '';
       });
 
     } else {
@@ -27,13 +29,20 @@ class _BmiState extends State<Bmi> {
             content: Text('Type height and weight', style: TextStyle(fontSize: 20),),
           ));
         }else{
+        try {
           var weight = double.parse(_weightController.text);
           var height = double.parse(_heightController.text);
-          var bmi = weight / (height*height);
-//          debugPrint(bmi.toStringAsFixed(2)); //print 2 decimal places
+          var bmi = weight / (height * height);
+          //          debugPrint(bmi.toStringAsFixed(2)); //print 2 decimal places
           setState(() {
             _result = 'BMI = ${bmi.toStringAsFixed(2)}';
           });
+        } catch (e) {
+          key.currentState.showSnackBar(SnackBar(
+          content: Text('Invalid height or weight', style: TextStyle(fontSize: 20),),
+        ));
+
+        }
         }
     }
   }
